@@ -27,7 +27,7 @@ router.post('/webhook', async (req: Request, res: Response) => {
         await line.replyMessage(replyToken, [
           {
             "type": "text",
-            "text": `ยินดีต้อนรับคุณ ${rs.displayName} สู่กลุ่มช่วยเหลือรร.วัดระฆังทอง ในวันที่ 21-23 ตุลาคม 66 รายละเอียดเพิ่มเติมจะแจ้งให้ทราบอีกครั้งนึงครับ`
+            "text": `ยินดีต้อนรับคุณ ${rs.displayName} สู่กลุ่มกิจกรรมพัฒนา รร.วัดระฆังทอง อ.โพธาราราม จ.ราชบุรีในวันที่ 21-23 ตุลาคม 66 รายละเอียดเพิ่มเติมจะแจ้งให้ทราบอีกครั้งนึงครับ`
           },
           {
             "type": "text",
@@ -46,6 +46,19 @@ router.post('/webhook', async (req: Request, res: Response) => {
               "text": "กรุณาติดต่อในกลุ่มเท่านั้นครับ"
             }
           ])
+      } else if (event.type === 'message') {
+        if (event.message.type == 'text') {
+          const text = event.message.text;
+          if (text == 'พิกัด' || text == 'โลเคชั่น') {
+            await line.replyMessage(replyToken,
+              [
+                {
+                  "type": "text",
+                  "text": "https://goo.gl/maps/YmtYMHQniv9NNBvB8"
+                }
+              ])
+          }
+        }
       }
       // console.log(event.type);
       // console.log(event);
